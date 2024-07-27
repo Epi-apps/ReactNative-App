@@ -1,8 +1,8 @@
 import { Text, StyleSheet, View } from 'react-native';
-import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useColorScheme } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useColorScheme } from '@/hooks/useColorScheme';
 
-function HomeScreen() {
+export default function HomeScreen() {
   const colorScheme = useColorScheme();
   const insets = useSafeAreaInsets();
   const themeTextStyle = colorScheme === 'light' ? styles.lightThemeText : styles.darkThemeText;
@@ -14,14 +14,6 @@ function HomeScreen() {
         <Text style={[styles.text, themeTextStyle]}>Content is in safe area in theme: {colorScheme}</Text>
       </View>
     </View>
-  );
-}
-
-export default function App() {
-  return (
-    <SafeAreaProvider>
-      <HomeScreen />
-    </SafeAreaProvider>
   );
 }
 
