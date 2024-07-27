@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { View, Text, StyleSheet, FlatList, Image, TextInput, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import { View, Text, StyleSheet, FlatList, Image, TextInput, TouchableOpacity, Platform } from 'react-native';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
@@ -35,7 +35,7 @@ export default function GiphyScreen() {
   const themeTextStyle = colorScheme === 'light' ? styles.lightThemeText : styles.darkThemeText;
   const themeContainerStyle = colorScheme === 'light' ? styles.lightContainer : styles.darkContainer;
   const [query, setQuery] = useState('Futurama Bender cash');
-  const [gifs, setGifs] = useState([]);
+  const [gifs, setGifs] = useState<GifItem[]>([]);
   const [limit, setLimit] = useState(20);
 
   const fetchGifs = async () => {
@@ -114,18 +114,18 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   image: {
-    marginLeft: '2%',
-    marginTop: '1%',
-    marginRight: '1%',
-    marginBottom: '1%',
+    marginLeft: Platform.OS === 'web' ? 5 : '2%',
+    marginTop: Platform.OS === 'web' ? 5 : '1%',
+    marginRight: Platform.OS === 'web' ? 5 : '1%',
+    marginBottom: Platform.OS === 'web' ? 5 : '1%',
     borderRadius: 8,
   },
   square: {
-    width: '44%',
+    width: Platform.OS === 'web' ? 150 : '44%',
     height: 150,
   },
   rectangle: {
-    width: '48%',
+    width: Platform.OS === 'web' ? 200 : '48%',
     height: 150,
   },
   input: {
@@ -143,6 +143,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 8,
     marginBottom: 10,
+    marginTop: 10,
   },
   buttonText: {
     color: '#fff',
